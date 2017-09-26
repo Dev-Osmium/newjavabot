@@ -9,7 +9,7 @@ public class onMessageReceived {
         if(event.getMessage().getContent().startsWith(BotUtils.BOT_PREFIX + "test"))
             BotUtils.sendMessage(event.getChannel(), "I am sending a message from an EventSubscriber listener");
         else if (event.getMessage().getContent().startsWith(BotUtils.BOT_PREFIX + "ping")) {
-            BotUtils.sendMessage((event.getChannel(), "pong");
+            BotUtils.sendMessage((event.getChannel(), "pong"));
         }
     }
 
