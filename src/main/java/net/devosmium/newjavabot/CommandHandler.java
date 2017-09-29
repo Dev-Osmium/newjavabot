@@ -1,5 +1,6 @@
 package net.devosmium.newjavabot;
 import sx.blah.discord.api.events.EventSubscriber;
+import sx.blah.discord.handle.impl.events.guild.GuildCreateEvent;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
 import sx.blah.discord.handle.impl.obj.Embed;
 import sx.blah.discord.util.EmbedBuilder;
@@ -13,19 +14,20 @@ public class CommandHandler {
     // A static map of commands mapping from command string to the functional impl
     private static Map<String, Command> commandMap = new HashMap<>();
     static CharSequence[] bannedWords = {
-        "damn",
-        "shit"
+            "damn",
+            "shit"
     };
+
     // Statically populate the commandMap with the intended functionality
     // Might be better practise to do this from an instantiated objects constructor
     static {
 
         commandMap.put("testcommand", (event, args) -> {
-            BotUtils.sendMessage(event.getChannel(), "This is how messages *should* look!", "Example!",event,true);
+            BotUtils.sendMessage(event.getChannel(), "This is how messages *should* look!", "Example!", event, true);
         });
 
         commandMap.put("ping", (event, args) -> {
-            BotUtils.sendMessage(event.getChannel(),"pong","Pong!",event,true);
+            BotUtils.sendMessage(event.getChannel(), "pong", "Pong!", event, true);
         });
 
     }
@@ -33,7 +35,7 @@ public class CommandHandler {
     @EventSubscriber
     public void onMessageReceived (MessageReceivedEvent event) {
         // This whole FOR loop is the badwords filter.
-        for (int i = 0; i<bannedWords.length; i++) {
+        for (int i = 0; i < bannedWords.length; i++) {
             System.out.println("I didn't bork the FOR loop!");
             if (event.getMessage().getContent().contains(bannedWords[i])) {
                 try {
@@ -48,7 +50,7 @@ public class CommandHandler {
                 }
             }
         }
-            // Note for error handling, you'll probably want to log failed commands with a logger or sout
+        // Note for error handling, you'll probably want to log failed commands with a logger or sout
         // In most cases it's not advised to annoy the user with a reply incase they didn't intend to trigger a
         // command anyway, such as a user typing ?notacommand, the bot should not say "notacommand" doesn't exist in
         // most situations. It's partially good practise and partially developer preference
@@ -75,6 +77,7 @@ public class CommandHandler {
 
         if (commandMap.containsKey(commandStr))
             commandMap.get(commandStr).runCommand(event, argsList);
-}
-    }
 
+
+    }
+}
