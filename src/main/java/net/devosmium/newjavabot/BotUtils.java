@@ -9,11 +9,13 @@ import sx.blah.discord.util.EmbedBuilder;
 import sx.blah.discord.util.RateLimitException;
 import sx.blah.discord.util.RequestBuffer;
 
+
 class BotUtils {
 
     // Constants for use throughout the bot
     static String BOT_PREFIX = "/";
     static String RECOG_NAME = "NewBot";
+    //private static SentryClient sentry;
 
     // Handles the creation and getting of a IDiscordClient object for a token
     static IDiscordClient getBuiltDiscordClient(String token){
@@ -27,6 +29,15 @@ class BotUtils {
     }
 
     // Helper functions to make certain aspects of the bot easier to use.
+
+    /**
+     *
+     * @param channel event.getChannel();
+     * @param description The actual message you want to send
+     * @param title Typically something like 'Success' or 'Error'
+     * @param event Should just be event
+     * @param isSuccess Whether it should be green or red
+     */
     static void sendMessage(IChannel channel, String description, String title, MessageReceivedEvent event, Boolean isSuccess){
 
         // This might look weird but it'll be explained in another page.
