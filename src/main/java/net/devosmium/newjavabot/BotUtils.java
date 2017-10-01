@@ -80,7 +80,4 @@ class BotUtils {
 
     }
 
-    static void decentEmbedBuilder(String title, String author) {
-
-    }
 }
